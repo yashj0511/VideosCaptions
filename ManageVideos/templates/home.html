@@ -1,0 +1,95 @@
+
+{% extends 'base.html'%}
+
+
+{% block body %}
+
+
+
+    <!-- {% for v in video %}
+
+    <h1>{{ v.title }}</h1>
+    <video width="600" controls>
+        <source src="{{ v.Video.url }}">
+        {% if v.subtitles_file %}
+     
+            <track src="{{ v.subtitles_file.url }}" kind="subtitles" srclang="en" label="English" default>
+        {% endif %}
+    </video>
+{% endfor %} -->
+
+
+
+<div class="container">
+    <div class="row mt-2">
+        {% for v in video %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <video width="100%" controls>
+                        <source src="{{ v.Video.url }}">
+                        {% if v.subtitles_file %}
+                            <track src="{{ v.subtitles_file.url }}" kind="subtitles" srclang="en" label="English" default>
+                        {% endif %}
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ v.title }}</h5>
+                        <a href="{% url 'EditSubs' slug=v.slug %}" class="btn btn-primary">Edit</a>
+                     
+                        
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+ {% endblock body%}
+
+
+   
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div id="app">
+        <video-list :videos="{{ video_json }}"></video-list>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        Vue.component('video-list', {
+            props: ['videos'],
+            template: `
+            <div>
+                <h1>Video List</h1>
+                <ul>
+                    <li v-for="video in videos" :key="video.title">
+                        <h2>title</h2>
+                        <video width="600" controls>
+                            <source :src="video.video_url">
+                            <track v-if="video.subtitles_url" :src="video.subtitles_url" kind="subtitles" srclang="en" label="English" default>
+                        </video>
+                    </li>
+                </ul>
+            </div>
+            `,
+        });
+    
+        new Vue({
+        el: '#app',
+        data: {
+            video_json: {{ video_json|safe }},
+        },
+    });
+
+    </script>
+    
+</body>
+</html> -->
