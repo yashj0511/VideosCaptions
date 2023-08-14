@@ -88,7 +88,7 @@ def EditSubs(request, slug):
             subtitles_file = obj.subtitles_file
             if subtitles_file:
                 with open(subtitles_file.path, 'a') as file:
-                    file.write(f'{formatted_subtitle}')
+                    file.write(f'\n{formatted_subtitle}')
             else:
                 new_subtitles_file = os.path.join(settings.MEDIA_ROOT, 'Subtitles', f'{obj.slug}.vtt')
                 with open(new_subtitles_file, 'w') as file:
